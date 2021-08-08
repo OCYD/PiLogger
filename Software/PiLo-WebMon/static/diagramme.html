@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<title>PiLogger Diagramme</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/static/w3_pilo.css" rel="stylesheet"/>
+<link href="/static/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+<script src="/static/dygraph_p.min.js"></script>
+<link href="/static/dygraph_p.css" rel="stylesheet"/>
+
+<body class="w3-border-blue-grey">
+	<!-- Top container -->
+	<div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
+		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="sb_open();"><img class="Icon_menu-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABGAQMAAABcwuAOAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA9JREFUeNpjYBgFo2AkAwADAgABPpHTkAAAAABJRU5ErkJggg==" style="width:26px">  Menu</button>
+		<span class="w3-bar-item">PiLogger</span>
+		<span class="w3-bar-item w3-right"><img class="Icon_logo" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGcAAABVAQMAAABuPWgcAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjILBDAAEpgABE+qVdwAAAABJRU5ErkJggg==" class="w3-left w3-round-medium w3-margin-right" style="width:33px"></span>
+	</div>
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-collapse w3-pale-blue w3-animate-left" style="z-index:3;width:185px;" id="mySidebar"><br>
+		<div class="w3-container">
+			<h5>Menu</h5>
+		</div>
+		<div class="w3-bar-block">
+			<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="sb_close()" title="close menu"><img class="Icon_close-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA+AQMAAABJDzoHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA9JREFUeNpjYBgFo4BYAAACLgABmfbm4QAAAABJRU5ErkJggg==" style="width:26px">  Close Menu</a>
+			<a href="/" class="w3-bar-item w3-button w3-padding"><img class="Icon_live-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Live Werte</a>
+			<a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><img class="Icon_chart-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Diagramme</a>
+			<a href="/static/einstell1.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_einstell-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Einstellungen 1</a>
+			<a href="/static/einstell2.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_wrench-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Einstellungen 2</a>
+			<a href="/static/download.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_download-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Download</a>
+		</div>
+	</nav>
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="sb_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main" style="margin-left:190px;margin-top:45px;height:100%">
+		<div class="w3-container w3-light-grey">
+			<h4>Diagramme</h4>
+		</div>
+		<div id="graph_div" style="position:absolute;height:85vh;width:85vw;margin-top:10px;margin-bottom:10px;z-index:1"></div>
+		<div class="w3-container" style="position:absolute;top:105vh;top:calc(85vh + 115px);width:85vw">
+			<div class="w3-container" style="height:32px">
+				<input type=checkbox id="fill" unchecked onClick="changeFill(this)">
+				<label for="fill">Füllen</label>
+			</div>
+			<div class="w3-half">
+				<b>Anzeige linke Achse:</b>
+				<table class="w3-table-all">
+					<tr><td>Temp</td>
+						<td><input type=checkbox id="1" unchecked onClick="change(this)">
+							<label for="1">Avg</label></td>
+						<td><input type=checkbox id="2" unchecked onClick="change(this)">
+							<label for="2">Min</label></td>
+						<td><input type=checkbox id="3" unchecked onClick="change(this)">
+							<label for="3">Max</label></td>
+						</tr>
+					<tr><td>Wind</td>
+						<td><input type=checkbox id="5" unchecked onClick="change(this)">
+							<label for="5">Avg</label></td>
+						<td><input type=checkbox id="6" unchecked onClick="change(this)">
+							<label for="6">Min</label></td>
+						<td><input type=checkbox id="7" unchecked onClick="change(this)">
+							<label for="7">Max</label></td>
+						</tr>
+					<tr><td>Volt</td>
+						<td><input type=checkbox id="9" unchecked onClick="change(this)">
+							<label for="9">Avg</label></td>
+						<td><input type=checkbox id="10" unchecked onClick="change(this)">
+							<label for="10">Min</label></td>
+						<td><input type=checkbox id="11" unchecked onClick="change(this)">
+							<label for="11">Max</label></td>
+						</tr>
+					<tr><td>Amps</td>
+						<td><input type=checkbox id="13" unchecked onClick="change(this)">
+							<label for="13">Avg</label></td>
+						<td><input type=checkbox id="14" unchecked onClick="change(this)">
+							<label for="14">Min</label></td>
+						<td><input type=checkbox id="15" unchecked onClick="change(this)">
+							<label for="15">Max</label></td>
+						</tr>
+					<tr><td>Watt</td>
+						<td><input type=checkbox id="17" unchecked onClick="change(this)">
+							<label for="17">Avg</label></td>
+						<td><input type=checkbox id="18" unchecked onClick="change(this)">
+							<label for="18">Min</label></td>
+						<td><input type=checkbox id="19" unchecked onClick="change(this)">
+							<label for="19">Max</label></td>
+						</tr>
+					<tr><td>Ohm</td>
+						<td><input type=checkbox id="20" unchecked onClick="change(this)">
+							<label for="20">Ohm</label></td>
+						<td></td><td></td></tr>
+					<tr><td>Wh</td>
+						<td><input type=checkbox id="21" unchecked onClick="change(this)">
+							<label for="21">Bila</label></td>
+						<td><input type=checkbox id="22" unchecked onClick="change(this)">
+							<label for="22">Ertr</label></td>
+						<td><input type=checkbox id="23" unchecked onClick="change(this)">
+							<label for="23">Verb</label></td>
+						</tr>
+					<tr><td>Wh Tag</td>
+						<td><input type=checkbox id="24" unchecked onClick="change(this)">
+							<label for="24">BilTg</label></td>
+						<td><input type=checkbox id="25" unchecked onClick="change(this)">
+							<label for="25">ErtTg</label></td>
+						<td><input type=checkbox id="26" unchecked onClick="change(this)">
+							<label for="26">VerTg</label></td>
+						</tr>
+				</table>
+			</div>
+			<div class="w3-half">
+				<b>Anzeige rechte Achse:</b>
+				<table class="w3-table-all">
+					<tr><td>Temp</td>
+						<td><input type=checkbox id="31" unchecked onClick="change(this)">
+							<label for="31">Avg</label></td>
+						<td><input type=checkbox id="32" unchecked onClick="change(this)">
+							<label for="32">Min</label></td>
+						<td><input type=checkbox id="33" unchecked onClick="change(this)">
+							<label for="33">Max</label></td>
+						</tr>
+					<tr><td>Wind</td>
+						<td><input type=checkbox id="35" unchecked onClick="change(this)">
+							<label for="35">Avg</label></td>
+						<td><input type=checkbox id="36" unchecked onClick="change(this)">
+							<label for="36">Min</label></td>
+						<td><input type=checkbox id="37" unchecked onClick="change(this)">
+							<label for="37">Max</label></td>
+						</tr>
+					<tr><td>Volt</td>
+						<td><input type=checkbox id="39" unchecked onClick="change(this)">
+							<label for="39">Avg</label></td>
+						<td><input type=checkbox id="40" unchecked onClick="change(this)">
+							<label for="40">Min</label></td>
+						<td><input type=checkbox id="41" unchecked onClick="change(this)">
+							<label for="41">Max</label></td>
+						</tr>
+					<tr><td>Amps</td>
+						<td><input type=checkbox id="43" unchecked onClick="change(this)">
+							<label for="43">Avg</label></td>
+						<td><input type=checkbox id="44" unchecked onClick="change(this)">
+							<label for="44">Min</label></td>
+						<td><input type=checkbox id="45" unchecked onClick="change(this)">
+							<label for="45">Max</label></td>
+						</tr>
+					<tr><td>Watt</td>
+						<td><input type=checkbox id="47" unchecked onClick="change(this)">
+							<label for="47">Avg</label></td>
+						<td><input type=checkbox id="48" unchecked onClick="change(this)">
+							<label for="48">Min</label></td>
+						<td><input type=checkbox id="49" unchecked onClick="change(this)">
+							<label for="49">Max</label></td>
+						</tr>
+					<tr><td>Ohm</td>
+						<td><input type=checkbox id="50" unchecked onClick="change(this)">
+							<label for="50">Ohm</label></td>
+						<td></td><td></td></tr>
+					<tr><td>Wh</td>
+						<td><input type=checkbox id="51" unchecked onClick="change(this)">
+							<label for="51">Bila</label></td>
+						<td><input type=checkbox id="52" unchecked onClick="change(this)">
+							<label for="52">Ertr</label></td>
+						<td><input type=checkbox id="53" unchecked onClick="change(this)">
+							<label for="53">Verb</label></td>
+						</tr>
+					<tr><td>Wh Tag</td>
+						<td><input type=checkbox id="54" unchecked onClick="change(this)">
+							<label for="54">BilTg</label></td>
+						<td><input type=checkbox id="55" unchecked onClick="change(this)">
+							<label for="55">ErtTg</label></td>
+						<td><input type=checkbox id="56" unchecked onClick="change(this)">
+							<label for="56">VerTg</label></td>
+						</tr>
+				</table>
+			</div>
+			<b>.</b>
+		</div>
+	</div>
+	<!-- End page content -->
+	<script>
+	/**
+	* @license
+	* Copyright 2018,2020 G.Weiß-Engel (info@pilogger.de)
+	* MIT-licensed (http://opensource.org/licenses/MIT)
+	*/
+
+	var mySidebar = document.getElementById("mySidebar");
+	var overlayBg = document.getElementById("myOverlay");
+	function sb_open() {
+		if (mySidebar.style.display === 'block') {
+			mySidebar.style.display = 'none';
+			overlayBg.style.display = "none";
+		} else {
+			mySidebar.style.display = 'block';
+			overlayBg.style.display = "block";
+		}
+	}
+	function sb_close() {
+		mySidebar.style.display = "none";
+		overlayBg.style.display = "none";
+	}
+	var g_show = getURLParameter('show');
+	var g_data = "/logdata/";
+	var url_data = getURLParameter('data');
+	if (url_data != '') {
+		g_data += url_data;
+	} else {
+		g_data += 'showdata.csv';
+	}
+	var g = [];
+	function drawgraph() {
+		g = new Dygraph(
+			document.getElementById("graph_div"),
+			g_data, {
+				axes:{y2:{labelsKMB:false,drawGrid:true,independentTicks:true,gridLinePattern:[2,2]}},
+				interactionModel: Dygraph.defaultInteractionModel,
+				animatedZooms:false,
+				delimiter: ';',
+				digitsAfterDecimal: 2,
+				rollPeriod: 1,
+				showRoller: true,
+				strokeWidth: 2,
+				strokeBorderWidth: 1,
+				errorBars: false,
+				connectSeparatedPoints: false,
+				pointSize: 3,
+				highlightCircleSize: 5,
+				legend: 'always',
+				labelsSeparateLines: true,
+				colors: ['#000000','#CC0000','#2847C5','#EE1111','#000000','#000066','#2847C5','#EE1111','#000000','#004D4D','#2847C5','#EE1111','#000000','#FF6600','#2847C5','#EE1111','#000000','#CCCC00','#2847C5','#EE1111','#006600','#000000','#2847C5','#EE1111','#000000','#2847C5','#EE1111'],
+				visibility: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+			}
+		);
+		g.ready ( function() {
+			g_labels=g.getLabels();
+			switch (g_show) {
+				case 'temp': setVis(1);setVis(2);setVis(3);break;
+				case 'wind': setVis(5);setVis(6);setVis(7);break;
+				case 'volt': setVis(9);setVis(10);setVis(11);break;
+				case 'amps': setVis(13);setVis(14);setVis(15);break;
+				case 'watt': setVis(17);setVis(18);setVis(19);break;
+				case 'ohms': setVis(20);break;
+				case 'enerperm': setVis(21);setVis(22);setVis(23);break;
+				case 'enerday': setVis(24);setVis(25);setVis(26);break;
+				default: setVis(1);
+			};
+		});
+	}
+
+	function change(el) {
+		var reihe = parseInt(el.id);
+		if (reihe < 30) {
+			var reiheTag = g_labels[reihe+1];
+			g.setVisibility(reihe,el.checked);
+			if (el.checked) {
+				g.updateOptions({series:{[reiheTag]:{axis:'y',strokePattern:null}}});
+				document.getElementById(reihe+30).checked = false;
+			}
+		} else {
+			reiheTag = g_labels[reihe-29];
+			g.setVisibility(reihe-30,el.checked);
+			if (el.checked) {
+				g.updateOptions({series:{[reiheTag]:{axis:'y2',strokePattern:[2,1]}}});
+				document.getElementById(reihe-30).checked = false;
+			} else {
+				g.updateOptions({series:{[reiheTag]:{axis:'y',strokePattern:null}}});
+			}
+		}
+	}
+	
+	function changeFill(el) {
+		g.updateOptions({fillGraph: (el.checked)});
+	}
+	
+	function setVis(k) {
+		g.setVisibility(parseInt(k),true);
+		document.getElementById(k).checked = true;
+	}
+	
+	function getURLParameter(name) {
+		var value = decodeURIComponent((RegExp(name + '=' + '(.+?)(&|$|;)').exec(location.search) || [, ""])[1]);
+		return (value !== 'null') ? value : false;
+	}
+	drawgraph();
+	</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<title>PiLogger Download</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/static/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+<link href="/static/w3_pilo.css" rel="stylesheet"/>
+
+<body class="w3-border-blue-grey">
+	<!-- Top container -->
+	<div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
+		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="sb_open();"><img class="Icon_menu-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABGAQMAAABcwuAOAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA9JREFUeNpjYBgFo2AkAwADAgABPpHTkAAAAABJRU5ErkJggg==" style="width:26px">  Menu</button>
+		<span class="w3-bar-item">PiLogger</span>
+		<span class="w3-bar-item w3-right"><img class="Icon_logo" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGcAAABVAQMAAABuPWgcAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjILBDAAEpgABE+qVdwAAAABJRU5ErkJggg==" class="w3-left w3-round-medium w3-margin-right" style="width:33px"></span>
+	</div>
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-collapse w3-pale-blue w3-animate-left" style="z-index:3;width:185px;" id="mySidebar"><br>
+		<div class="w3-container">
+			<h5>Menu</h5>
+		</div>
+		<div class="w3-bar-block">
+			<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="sb_close()" title="close menu"><img class="Icon_close-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA+AQMAAABJDzoHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA9JREFUeNpjYBgFo4BYAAACLgABmfbm4QAAAABJRU5ErkJggg==" style="width:26px">  Close Menu</a>
+			<a href="/" class="w3-bar-item w3-button w3-padding"><img class="Icon_live-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Live Werte</a>
+			<a href="/static/diagramme.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_chart-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Diagramme</a>
+			<a href="/static/einstell1.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_einstell-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Einstellungen 1</a>
+			<a href="/static/einstell2.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_wrench-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Einstellungen 2</a>
+			<a href="/static/kalibration.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_waage-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Kalibration</a>
+			<a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><img class="Icon_download-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Download</a>
+		</div>
+	</nav>
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="sb_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main" style="margin-left:190px;margin-top:45px;">
+		<div class="w3-container w3-light-grey">
+			<h4>Download</h4>
+		</div>
+		<div class="w3-panel">
+			<span id="filelist"></span>
+		</div>
+		<div class="w3-panel">
+			<button class="pL-button" onclick="window.location.href = '/download/logdata.csv';">aktuelle Daten-Datei herunterladen</button>
+		</div>
+		<div id="confmod" class="w3-modal">
+			<div class="w3-modal-content w3-center w3-padding-24 w3-round-large">
+				<h3><span>Rückfrage</span></h3>
+				<h4><span id="conftext"></span></h4>
+				<div class="w3-panel">
+					<button id="conf_yes" class="pL-button w3-red w3-padding">Löschen</button>
+					<span style="color:#fff">---------</span>
+					<button id="conf_no" class="pL-button w3-orange w3-padding">Abbrechen</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End page content -->
+	<script>
+	/**
+	* @license
+	* Copyright 2018, 2020 G.Weiß-Engel (info@pilogger.de)
+	* MIT-licensed (http://opensource.org/licenses/MIT)
+	*/
+
+	var mySidebar = document.getElementById("mySidebar");
+	var overlayBg = document.getElementById("myOverlay");
+	function sb_open() {
+		if (mySidebar.style.display === 'block') {
+			mySidebar.style.display = 'none';
+			overlayBg.style.display = "none";
+		} else {
+			mySidebar.style.display = 'block';
+			overlayBg.style.display = "block";
+		}
+	}
+	function sb_close() {
+		mySidebar.style.display = "none";
+		overlayBg.style.display = "none";
+	}
+
+	async function modal_confirm(frage) {
+		var confmod = document.getElementById("confmod");
+		var btn_yes = document.getElementById("conf_yes");
+		var btn_no = document.getElementById("conf_no");
+		document.getElementById("conftext").innerHTML = frage;
+		confmod.style.display = "block";
+		let auswahl = new Promise((resolve, reject) => {
+			btn_no.onclick = function() {
+				confmod.style.display = "none";
+				resolve(0);
+			};
+			btn_yes.onclick = function() {
+				confmod.style.display = "none";
+				resolve(1);
+			};
+		});
+		let ergebnis = await auswahl;
+		return ergebnis;
+	}
+
+	async function req_delete(logfile,listid) {
+		let antw = await modal_confirm('Datei "'+logfile+'"\nendgültig löschen ?');
+		if (antw ==1) {
+			var butnum = "d" + listid;
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET","/reqdelete/" + logfile,true);
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					var element = document.getElementById(butnum);
+					if (this.responseText == "ok") {
+						element.classList.add("success");
+						setTimeout(function () {element.classList.remove("success");get_file_list();},2000);
+					}else{
+						console.error(xhr.statusText);
+						console.log("Fehler @ Req_Delete");
+						element.classList.add("fail");
+						setTimeout(function () {element.classList.remove("fail")},2000);
+					}
+				}
+			};
+			xhr.send();
+		};
+	}
+
+	function get_file_list() {
+		var xhr = new XMLHttpRequest();
+		var icon_dl = '<img class="Icon_download-bl" alt="" style="width:24px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==">';
+		var icon_ch = '<img class="Icon_eye-bl" alt="" style="width:24px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==">';
+		var icon_rm = '<img class="Icon_close-bl" alt="" style="width:20px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA+AQMAAABJDzoHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA9JREFUeNpjYBgFo4BYAAACLgABmfbm4QAAAABJRU5ErkJggg==">';
+		var idnum = 0;
+		xhr.open("GET","/listdatafiles/", true);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					var myArr = JSON.parse(this.responseText);
+					var txt = "<table border='1'>"
+					for (x in myArr) {
+						idnum += 1;
+						txt += '<tr><td>' + myArr[x] + '</td><td class="w3-bar-item pLm-button" onclick="window.location.href=' + "'/download/" + myArr[x] + "'" + '">' + icon_dl;
+						txt += '</td><td class="w3-bar-item pLm-button w3-yellow" onclick="javascript:location.href=' + "'/static/diagramme.html?data=" + myArr[x] + "'" + '">' + icon_ch;
+						txt += '</td><td class="w3-bar-item pLm-button w3-red" id="d' + idnum + '" onclick="req_delete(' + "'" + myArr[x] + "'," + idnum + ')" >' + icon_rm + '</td></tr>';
+					}
+					txt += "</table>";
+					document.getElementById("filelist").innerHTML = txt;
+				} else {
+					console.error(xhr.statusText);
+					console.log("Error processing get_file_list");
+				}
+			}
+		};
+		xhr.send();
+	}
+
+	window.onload = function() {
+		get_file_list();
+	}
+
+	</script>
+</body>
+</html>

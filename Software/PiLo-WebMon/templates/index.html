@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<title>PiLogger Web-Monitor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/static/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+<link href="/static/w3_pilo.css" rel="stylesheet"/>
+
+<body class="w3-border-blue-grey">
+	<!-- Top container -->
+	<div class="w3-bar w3-top w3-indigo w3-large" style="z-index:4">
+		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="sb_open();"><img class="Icon_menu-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABGAQMAAABcwuAOAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA9JREFUeNpjYBgFo2AkAwADAgABPpHTkAAAAABJRU5ErkJggg==" style="width:26px">  Menu</button>
+		<span class="w3-bar-item">PiLogger</span>
+		<span class="w3-bar-item w3-right"><img class="Icon_logo" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGcAAABVAQMAAABuPWgcAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjILBDAAEpgABE+qVdwAAAABJRU5ErkJggg==" class="w3-left w3-round-medium w3-margin-right" style="width:33px"></span>
+	</div>
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-collapse w3-pale-blue w3-animate-left" style="z-index:3;width:185px;" id="mySidebar">
+		<div class="w3-container">
+			<h5>Menu</h5>
+		</div>
+		<div class="w3-bar-block">
+			<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="sb_close()" title="close menu"><img class="Icon_close-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA+AQMAAABJDzoHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAA9JREFUeNpjYBgFo4BYAAACLgABmfbm4QAAAABJRU5ErkJggg==" style="width:26px">  Close Menu</a>
+			<a href="/" class="w3-bar-item w3-button w3-padding w3-blue"><img class="Icon_live-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Live Werte</a>
+			<a href="/static/diagramme.html" class="w3-bar-item w3-button"><img class="Icon_chart-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Diagramme</a>
+			<a href="/static/einstell1.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_einstell-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Einstellungen 1</a>
+			<a href="/static/einstell2.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_wrench-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Einstellungen 2</a>
+			<a href="/static/kalibration.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_waage-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Kalibration</a>
+			<a href="/static/download.html" class="w3-bar-item w3-button w3-padding"><img class="Icon_download-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:32px"> Download</a>
+		</div>
+	</nav>
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="sb_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main" style="margin-left:190px;margin-top:45px;">
+		<div class="w3-margin-left" id="PiLoTime"></div>
+		<div class="w3-row-padding w3-margin-bottom">
+			<a href="/static/diagramme.html?show=temp" class="w3-quarter w3-button">
+				<div class="w3-container w3-red w3-padding-small">
+					<div class="w3-left"><img class="Icon_temp-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="PiLoTemp2"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoTemp1"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Temperatur</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=wind" class="w3-quarter w3-button">
+				<div class="w3-container w3-blue w3-padding-small">
+					<div class="w3-left"><img class="Icon_windrad-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="PiLoWind2"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoWind1"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Wind</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=volt" class="w3-quarter w3-button">
+				<div class="w3-container w3-teal w3-padding-small">
+					<div class="w3-left"><img class="Icon_volt-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6>&ensp;</h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoVolt"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Spannung</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=amps" class="w3-quarter w3-button">
+				<div class="w3-container w3-orange w3-text-white w3-padding-small">
+					<div class="w3-left"><img class="Icon_strom-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6>&ensp;</h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoAmps"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Strom</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=watt" class="w3-quarter w3-button">
+				<div class="w3-container w3-yellow w3-padding-small">
+					<div class="w3-left"><img class="Icon_leistung-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6>&ensp;</h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoWatt"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Leistung</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=enerday" class="w3-quarter w3-button">
+				<div class="w3-container w3-light-green w3-padding-small">
+					<div class="w3-left"><img class="Icon_ertrag-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="TgEnTiE"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="TgEnerE"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Tages-Ertrag</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=enerday" class="w3-quarter w3-button">
+				<div class="w3-container w3-khaki w3-padding-small">
+					<div class="w3-left"><img class="Icon_verbrauch-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="TgEnTiV"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="TgEnerV"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Tages-Verbrauch</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=enerday" class="w3-quarter w3-button">
+				<div class="w3-container w3-cyan w3-padding-small">
+					<div class="w3-left"><img class="Icon_energie-bl" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="TgEnTi"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="TgEner"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Tages-Bilanz</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=ohms" class="w3-quarter w3-button">
+				<div class="w3-container w3-deep-orange w3-padding-small">
+					<div class="w3-left"><img class="Icon_widerstand-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="PiLoMode"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoOhms"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Widerstand</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=enerperm" class="w3-quarter w3-button">
+				<div class="w3-container w3-green w3-padding-small">
+					<div class="w3-left"><img class="Icon_ertrag-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="PiLoEnTiE"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoEnerE"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Dauer-Ertrag</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=enerperm" class="w3-quarter w3-button">
+				<div class="w3-container w3-brown w3-padding-small">
+					<div class="w3-left"><img class="Icon_verbrauch-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="PiLoEnTiV"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoEnerV"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Dauer-Verbrauch</h4>
+				</div>
+			</a>
+			<a href="/static/diagramme.html?show=enerperm" class="w3-quarter w3-button">
+				<div class="w3-container w3-indigo w3-padding-small">
+					<div class="w3-left"><img class="Icon_energie-wh" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABSAQMAAACc+jOaAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeNpjYBgFo2AUjAL6AwAEfAABm/3jNgAAAABJRU5ErkJggg==" style="width:48px"></div>
+					<div class="w3-right"><h6><span id="PiLoEnTi"></h6></div>
+					<div class="w3-clear"></div>
+					<div class="w3-right"><h2><span id="PiLoEner"></h2></div>
+					<div class="w3-clear"></div>
+					<h4>Dauer-Bilanz</h4>
+				</div>
+			</a>
+		</div>
+		<div id="Fehlermeldung" class="w3-modal">
+			<div class="w3-modal-content w3-center w3-padding-24 w3-round-large">
+				<h4><span>Fehlermeldung</span></h4>
+				<div id="Fehlertext" class="w3-left-align w3-margin-left"></div>
+				<div class="w3-panel">
+					<button onclick="Fehlerweg()" class="pL-button w3-red w3-padding">Schließen</button>
+				</div>
+			</div>
+		</div>
+		<button onclick="topFunction()" id="topBtn" title="Nach oben">&ensp;&Delta;&ensp;</button> 
+	<!-- End page content -->
+	</div>
+	<script>
+	/**
+	* @license
+	* Copyright 2018, 2020 G.Weiß-Engel (info@pilogger.de)
+	* MIT-licensed (http://opensource.org/licenses/MIT)
+	*/
+	var mySidebar = document.getElementById("mySidebar");
+	var overlayBg = document.getElementById("myOverlay");
+	function sb_open() {
+		if (mySidebar.style.display === 'block') {
+			mySidebar.style.display = 'none';
+			overlayBg.style.display = "none";
+		} else {
+			mySidebar.style.display = 'block';
+			overlayBg.style.display = "block";
+		}
+	}
+	function sb_close() {
+		mySidebar.style.display = "none";
+		overlayBg.style.display = "none";
+	}
+	var autorequestTimer;
+	// start Main Timer
+	window.onload = function () {
+		autorequestTimer = setTimeout(requestData, 100);
+	};
+	var fModal = document.getElementById("Fehlermeldung");
+	function Zeigefehler(text) {
+		document.getElementById("Fehlertext").innerHTML = text.replace(/;/g,"<br>");
+		fModal.style.display = "block";
+	};
+	function Fehlerweg() {
+		fModal.style.display = "none";
+	};
+	function requestData() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","/data/", true);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					var res = JSON.parse(xhr.responseText);
+					for (id in res) {
+						if (document.getElementById(id) !== null) {
+							document.getElementById(id).innerHTML = res[id];
+						};
+						if (id == "Fehler") {
+							if (res[id] != "") {
+								Zeigefehler(res[id]);
+							};
+						};
+					};
+					autorequestTimer = setTimeout(requestData, 2000);
+				} else {
+					console.error(xhr.statusText);
+					console.log("Error processing requestData");
+					clearTimeout(autorequestTimer);
+				}
+			}
+		};
+		xhr.send();
+	};
+	window.onscroll = function() {scrollFunction()};
+	function scrollFunction() {
+		if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+			document.getElementById("topBtn").style.display = "block";
+		} else {
+			document.getElementById("topBtn").style.display = "none";
+		}
+	}
+	function topFunction() {
+		document.body.scrollTop = 0; // For Safari
+		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	} 
+	</script>
+</body>
+</html>
